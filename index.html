@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Buy PYQERA a Coffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Auto Light/Dark Mode */
+        :root {
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --text-main: #222222;
+            --text-muted: #555555;
+            --border-color: #eeeeee;
+            --box-border: #e5e7eb;
+            --input-bg: #f9fafb;
+            --accent: #FFDD00;
+            --accent-hover: #ffcc00;
+            --toast-bg: #222222;
+            --toast-text: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Dark Mode Theme */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --card-bg: #1e1e1e;
+                --text-main: #f3f4f6;
+                --text-muted: #9ca3af;
+                --border-color: #374151;
+                --box-border: #4b5563;
+                --input-bg: #111827;
+                --accent: #FFDD00;
+                --accent-hover: #e6c800;
+                --toast-bg: #f3f4f6;
+                --toast-text: #111827;
+                --shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            box-shadow: var(--shadow); 
+            max-width: 380px; 
+            width: 100%; 
+            padding: 25px 20px; 
+            text-align: center; 
+            border: 1px solid var(--border-color); 
+            position: relative;
+            margin-top: 35px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .avatar { 
+            width: 76px; 
+            height: 76px; 
+            background-color: var(--card-bg); 
+            border-radius: 50%; 
+            margin: -60px auto 8px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 4px solid var(--card-bg);
+            overflow: hidden; 
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 { 
+            font-size: 20px; 
+            margin-bottom: 2px; 
+            font-weight: 700; 
+        }
+
+        p.subtitle { 
+            color: var(--text-muted); 
+            font-size: 12px; 
+            margin-bottom: 15px; 
+            font-weight: 500;
+        }
+
+        .content { 
+            color: var(--text-muted); 
+            line-height: 1.4; 
+            font-size: 13px; 
+            margin-bottom: 15px; 
+            padding: 0 5px;
+        }
+
+        .payment-box { 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 15px; 
+            border: 2px solid var(--box-border); 
+            transition: border-color 0.3s ease;
+        }
+        
+        .payment-box:hover {
+            border-color: var(--accent);
+        }
+
+        /* Payment Header jisme Text aur Download Button dono hain */
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 10px;
+        }
+
+        .support-text {
+            font-size: 14px; 
+            margin: 0; 
+            font-weight: 600;
+        }
+
+        /* Naya Download Button Design jo QR ke bahar hai */
+        .download-icon-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-muted);
+        }
+
+        .download-icon-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .qr-code { 
+            width: 130px; 
+            height: 130px; 
+            margin: 0 auto 12px; 
+            background-color: #ffffff; 
+            border-radius: 10px; 
+            border: 1px solid #e5e7eb;
+            padding: 6px;
+        }
+        
+        .qr-code img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+
+        .upi-section { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            background: var(--input-bg); 
+            border: 1px solid var(--box-border); 
+            border-radius: 12px; 
+            padding: 8px 8px 8px 12px; 
+        }
+
+        .upi-id { 
+            font-family: monospace; 
+            font-size: 13px; 
+            font-weight: 600; 
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn { 
+            background: var(--accent); 
+            color: #000000; 
+            border: none; 
+            border-radius: 20px; 
+            padding: 8px 16px; 
+            font-weight: 600; 
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+        }
+        
+        .copy-btn:hover { 
+            background: var(--accent-hover); 
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .toast { 
+            visibility: hidden; 
+            min-width: 220px; 
+            background-color: var(--toast-bg); 
+            color: var(--toast-text); 
+            text-align: center; 
+            border-radius: 24px; 
+            padding: 10px 15px; 
+            position: fixed; 
+            z-index: 1; 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            font-size: 13px; 
+            font-weight: 500;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .toast.show { 
+            visibility: visible; 
+            animation: fadein 0.4s, fadeout 0.4s 2.5s; 
+        }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 20px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 20px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+        
+        @media (max-height: 650px) {
+            .avatar { margin: -50px auto 5px; width: 64px; height: 64px; }
+            h1 { font-size: 18px; }
+            .content { font-size: 12px; margin-bottom: 10px; }
+            .qr-code { width: 110px; height: 110px; }
+            .card { padding: 20px 15px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="avatar">
+            <img src="images/logo.png" alt="PYQERA Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/76?text=P';">
+        </div>
+        
+        <h1>PYQERA</h1>
+        <p class="subtitle">PYQs, Notes & Tech</p>
+        
+        <div class="content">
+            <p>Hi! 👋 I'm the creator of <strong>PYQERA</strong>. I curate top-notch PYQs, study notes, and tech resources. If my work helps you excel, consider buying me a coffee to keep these resources free!</p>
+        </div>
+
+        <div class="payment-box">
+            <div class="payment-header">
+                <p class="support-text">Buy me a coffee ☕</p>
+                <a href="images/qr-code.png" download="PYQERA_QR.png" class="download-icon-btn" title="Save QR to Gallery" onclick="showDownloadToast()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="qr-code">
+                <img src="images/qr-code.png" alt="PYQERA UPI QR Code" onerror="this.onerror=null; this.src='https://via.placeholder.com/130?text=Scan';">
+            </div>
+            
+            <div class="upi-section">
+                <span class="upi-id" id="upi-text">cyloc@ibl</span>
+                <button class="copy-btn" onclick="copyUPI()">Copy</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showToastMessage(message) {
+            var toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "toast show";
+            
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
+        function showDownloadToast() {
+            showToastMessage("✅ Image saved in your gallery!");
+        }
+
+        function copyUPI() {
+            var upiText = document.getElementById("upi-text").innerText;
+            
+            navigator.clipboard.writeText(upiText).then(function() {
+                showToastMessage("✅ UPI ID copied successfully!");
+                
+                var btn = document.querySelector(".copy-btn");
+                btn.innerText = "Copied!";
+                btn.style.background = "var(--box-border)"; 
+                btn.style.color = "var(--text-main)";
+                
+                setTimeout(function(){ 
+                    btn.innerText = "Copy";
+                    btn.style.background = "var(--accent)";
+                    btn.style.color = "#000000";
+                }, 3000);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+                alert("Failed to copy UPI ID. Please copy it manually.");
+            });
+        }
+    </script>
+
+</body>
+</html>
